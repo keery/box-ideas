@@ -1,6 +1,20 @@
 {% extends "AppBundle::layout.html.twig" %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 'build/list-ideas.css' %}
+      <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
+{% endblock %}
+
 {% block content %}
+    {# Liste des différentes idées #}
+    <section>
+        <h1>List ideas</h1>
+        <div id="listIdea" data-ideas="{{ ideas }}"></div>
+    </section>
+    
+    {# Formulaire de publication d'idée #}
 	<section id="formIdea">
         {% for flash in app.session.flashbag.get('valid') %}  
             <div class="notif valid">
@@ -43,4 +57,13 @@
                 
         {{ form_end(form) }}
     </section>
+{% endblock %}
+
+{% block javascripts %}
+	
+  {% javascripts 'build/list-ideas.js' %}
+
+  	<script type="text/javascript" src="{{ asset_url }}"></script>
+
+  {% endjavascripts  %}
 {% endblock %}
