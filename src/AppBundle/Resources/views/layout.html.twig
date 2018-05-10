@@ -5,45 +5,32 @@
 {% endblock %}
 
 {% block stylesheets %}
-    {% stylesheets '@AdminBundle/Resources/public/css/style.css'
-    				'css/font-awesome.min.css'  output='css/admin.css' %}
+    {% stylesheets '@AppBundle/Resources/public/css/style.css' %}
       <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
     {% endstylesheets %}
 {% endblock %}
 
 {% block body %}
 
-	{% block nav %}	
-		{{ render(controller("AdminBundle:Admin:nav")) }}
-	{% endblock %}
+	<nav>
+        {% block nav %}{% endblock %}
+    </nav>
 
-
-	<div id="pr-page">
-		<div id="side-bar">
-			{% block sideBar %}
-				{{ render(controller("AdminBundle:Admin:sidebar")) }}
-			{% endblock %}
-		</div>
-
-		<div id="page">
-			{% block content %}
-				
-		  	{% endblock %}
-	  	</div>
-	</div>
+    <div class="container-fluid">
+        {% block content %}
+            
+        {% endblock %}
+    </div>
 
 {% endblock %}
 
 {% block javascripts %}
-	<script type="text/javascript" src="{{ asset("bundles/admin/js/plugin/tinymce/js/tinymce/tinymce.min.js") }}"></script>
-	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-	<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 	
-  {% javascripts 	'@AdminBundle/Resources/public/js/plugin/tinymce/js/langs/fr.js'
+  {# {% javascripts 	'@AdminBundle/Resources/public/js/plugin/tinymce/js/langs/fr.js'
   					'@AdminBundle/Resources/public/js/plugin/GEUploader.js'
 					'@AdminBundle/Resources/public/js/*' %}
 
   	<script type="text/javascript" src="{{ asset_url }}"></script>
 
-  {% endjavascripts  %}
+  {% endjavascripts  %} #}
 {% endblock %}

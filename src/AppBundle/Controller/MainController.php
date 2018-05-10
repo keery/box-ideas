@@ -7,14 +7,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+use AppBundle\Form\IdeaType;
 
 
 class MainController extends Controller
 {
     public function indexAction(Request $request)
     {
-        return $this->render('AppBundle:App:index.html.twig');
-    
-        return new Response($content);
+        $form = $this->get('form.factory')->create(IdeaType::class);
+        $vars['form'] = $form->createView();
+        return $this->render('AppBundle:App:index.html.twig', $vars);
     }
 }
