@@ -49,7 +49,7 @@ class Idea
 
         
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Vote", mappedBy="contenu", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Vote", mappedBy="idea", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $votes; 
