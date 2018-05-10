@@ -42,6 +42,13 @@ class Idea
      */
     private $author;
 
+        
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundke\Entity\Vote", mappedBy="contenu", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $votes; 
+
 
     /**
      * Get id
@@ -125,4 +132,3 @@ class Idea
         return $this->author;
     }
 }
-

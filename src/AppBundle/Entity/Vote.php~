@@ -72,28 +72,5 @@ class Vote
     {
         return $this->ipAdress;
     }
-
-    /**
-     * Set idea
-     *
-     * @param \AppBundle\Entity\Idea $idea
-     *
-     * @return Vote
-     */
-    public function setIdea(\AppBundle\Entity\Idea $idea)
-    {
-        $this->idea = $idea;
-
-        return $this;
-    }
-
-    /**
-     * Get idea
-     *
-     * @return \AppBundle\Entity\Idea
-     */
-    public function getIdea()
-    {
-        return $this->idea;
-    }
 }
+

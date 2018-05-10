@@ -42,6 +42,13 @@ class Idea
      */
     private $author;
 
+        
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Vote", mappedBy="contenu", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $votes; 
+
 
     /**
      * Get id
@@ -123,5 +130,46 @@ class Idea
     public function getAuthor()
     {
         return $this->author;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add vote
+     *
+     * @param \AppBundle\Entity\Vote $vote
+     *
+     * @return Idea
+     */
+    public function addVote(\AppBundle\Entity\Vote $vote)
+    {
+        $this->votes[] = $vote;
+
+        return $this;
+    }
+
+    /**
+     * Remove vote
+     *
+     * @param \AppBundle\Entity\Vote $vote
+     */
+    public function removeVote(\AppBundle\Entity\Vote $vote)
+    {
+        $this->votes->removeElement($vote);
+    }
+
+    /**
+     * Get votes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVotes()
+    {
+        return $this->votes;
     }
 }
