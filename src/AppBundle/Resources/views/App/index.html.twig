@@ -2,24 +2,34 @@
 
 {% block content %}
 	<section id="formIdea">
+        {% for flash in app.session.flashbag.get('valid') %}  
+            <div class="notif valid">
+                <span class="notif-icone"></span>
+                <div class="notif-titre">Success:</div>
+                {{ flash }}
+            </div>
+        {% endfor %}
         <h2>Publish a new idea</h2>
         {{ form_start(form, {'attr': {'class': 'body-form'}}) }}
             <div class="row">
                 <div class="col-sm-6 col-xs-12">
                     <div class="form-group">
                         {{ form_label(form.title, "Title") }}
+                        {{ form_errors(form.title) }}
                         {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                     </div>                    
                 </div>
                 <div class="col-sm-6 col-xs-12">
                     <div class="form-group">
                         {{ form_label(form.author, "Author") }}
+                        {{ form_errors(form.author) }}
                         {{ form_widget(form.author, {'attr': {'class': 'form-control', 'maxlength' : '50'}}) }}
                     </div>                    
                 </div>
                 <div class="col-xs-12">
                     <div class="form-group">                
                         {{ form_label(form.description, "Description") }}
+                        {{ form_errors(form.description) }}                        
                         {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
                     </div>                    
                 </div>
