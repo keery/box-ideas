@@ -1,0 +1,4 @@
+bi_main:
+    path: /
+    defaults:
+        _controller: AppBundle:Main:index

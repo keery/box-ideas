@@ -1,0 +1,4 @@
+var/
+vendor/
+composer-setup.php
+composer.phar

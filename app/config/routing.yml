@@ -1,0 +1,2 @@
+ge_route_main:
+    resource: "@AppBundle/Resources/config/routing.yml"
