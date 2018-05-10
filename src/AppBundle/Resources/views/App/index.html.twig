@@ -2,21 +2,35 @@
 
 {% block content %}
 	<section id="formIdea">
+        <h2>Publish a new idea</h2>
         {{ form_start(form, {'attr': {'class': 'body-form'}}) }}
-
-            {{ form_label(form.title, "Title") }}
-            {{ form_widget(form.title, {'attr': {'class': 'input'}}) }}
-
-            {{ form_label(form.author, "Author") }}
-            {{ form_widget(form.author, {'attr': {'class': 'input'}}) }}
-
-            {{ form_label(form.description, "Description") }}
-            {{ form_widget(form.description, {'attr': {'class': 'input'}}) }}
-           
-            <div class="submit-form">
-                <button type="reset" class="button cancel">Annuler</button>
-                {{ form_widget(form.submit, {'attr': {'class': 'valid'}}) }}
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        {{ form_label(form.title, "Title") }}
+                        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                    </div>                    
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="form-group">
+                        {{ form_label(form.author, "Author") }}
+                        {{ form_widget(form.author, {'attr': {'class': 'form-control', 'maxlength' : '50'}}) }}
+                    </div>                    
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">                
+                        {{ form_label(form.description, "Description") }}
+                        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                    </div>                    
+                </div>
+                <div class="col-xs-12 text-right">
+                    <div class="form-group">                
+                        <button type="reset" class="btn">Annuler</button>
+                        {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                    </div>
+                </div>
             </div>
+                
         {{ form_end(form) }}
     </section>
 {% endblock %}

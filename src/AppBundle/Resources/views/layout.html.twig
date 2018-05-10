@@ -5,7 +5,10 @@
 {% endblock %}
 
 {% block stylesheets %}
-    {% stylesheets '@AppBundle/Resources/public/css/style.css' %}
+    {% stylesheets 
+    '@AppBundle/Resources/public/css/style.css'
+    'https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'
+     %}
       <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
     {% endstylesheets %}
 {% endblock %}
