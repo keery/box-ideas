@@ -31,8 +31,8 @@ class Vote
     /**
     * @var Idea $idea
     *
-    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Idea", inversedBy="votes", cascade={"remove"})
-    * @ORM\JoinColumn(nullable=false)
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Idea", inversedBy="votes")
+    * @ORM\JoinColumn(nullable=false, onDelete="SET NULL")
     */
     public $idea;
 

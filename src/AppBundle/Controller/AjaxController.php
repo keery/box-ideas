@@ -13,13 +13,10 @@ use AppBundle\Entity\Idea;
 
 class AjaxController extends Controller
 {
-    public function upvoteAction(Request $request)
+    public function upvoteAction(Idea $idea, Request $request)
     {
         
-        $data = json_decode(file_get_contents('php://input'));
-        
-        if(isset($data->idIdea)) {
-            
+        if(isset($idea)) {
             $em = $this
                 ->getDoctrine()
                 ->getManager()
@@ -28,8 +25,7 @@ class AjaxController extends Controller
             $global_functions = $this->container->get('global_functions');
             $ip = $global_functions->getCurrentIp();
             
-            if(!$vote = $em->getRepository('AppBundle:Vote')->findOneBy(['idea' => $data->idIdea, 'ipAdress' => $ip])) {
-                $idea = $em->getRepository('AppBundle:Idea')->findOneById($data->idIdea);
+            if(!$vote = $em->getRepository('AppBundle:Vote')->findOneBy(['idea' => $idea->getId(), 'ipAdress' => $ip])) {
                 $vote = new Vote();
                 $vote->setIdea($idea);
                 $vote->setIpAdress($ip);
@@ -55,7 +51,7 @@ class AjaxController extends Controller
             ;
 
             $em->remove($idea);
-            // $em->flush();
+            $em->flush();
 
             return new JsonResponse("cool");            
         }

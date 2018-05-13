@@ -41,7 +41,7 @@ class Idea extends Component {
             body: JSON.stringify({idIdea: index})
         };
 
-        fetch('ajax/upvote', config)
+        fetch('ajax/upvote/'+index, config)
         .then((response) => {            
             this.setState( {votable: true })
         });

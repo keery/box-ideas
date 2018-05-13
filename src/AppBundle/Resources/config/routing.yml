@@ -6,9 +6,11 @@ bi_main:
 
 
 bi_ajax_upvote:
-    path: ajax/upvote
+    path: ajax/upvote/{id}
     defaults:
         _controller: AppBundle:Ajax:upvote
+    requirements:
+        id: .\d*          
 
 bi_ajax_delete_idea:
     path: ajax/delete/idea/{id}
