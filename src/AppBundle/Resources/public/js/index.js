@@ -7,17 +7,6 @@ import Idea from './components/Idea/Idea.js';
 const ListIdeasContainer = document.getElementById('listIdea');
 
 const ideas = JSON.parse(ListIdeasContainer.getAttribute('data-ideas'));
+const voted_ideas = JSON.parse(ListIdeasContainer.getAttribute('data-voted-ideas'));
 
-
-// const getData = (name, json = true) => {
-//     const value = TodoListElement.getAttribute(`data-${name}`);
-//     return json ? JSON.parse(value) : value;
-// };
-
-// // const element = React.createElement(Idea, {
-// //     items: getData(items),
-// // });
-
-ReactDOM.render(<ListIdeas ideas={ideas} />, document.getElementById('listIdea'));
-
-console.log("duhfdjf");
+ReactDOM.render(<ListIdeas ideas={ideas} voted_ideas={voted_ideas} />, document.getElementById('listIdea'));

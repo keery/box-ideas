@@ -4,6 +4,9 @@ parameters:
     #parameter_name: value
 
 services:
+    global_functions:
+        class: AppBundle\Functions\Functions
+        public: true
     # default configuration for services in *this* file
     _defaults:
         # automatically injects dependencies in your services

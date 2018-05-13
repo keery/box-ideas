@@ -9,6 +9,14 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     .enableReactPreset()
     .addEntry('list-ideas', './src/AppBundle/Resources/public/js/index.js')
+    .configureBabel(function(babelConfig) {
+        // add additional presets
+        babelConfig.presets.push('es2015');
+        babelConfig.presets.push('stage-2');
+
+        // no plugins are added by default, but you can add some
+        // babelConfig.plugins.push('styled-jsx/babel');
+    })
     // uncomment to create hashed filenames (e.g. app.abc123.css)
     // .enableVersioning(Encore.isProduction())
 

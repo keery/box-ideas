@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Limenius\ReactBundle\LimeniusReactBundle(),
+            // new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new AppBundle\AppBundle(),
         ];
 

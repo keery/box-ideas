@@ -12,35 +12,33 @@ use AppBundle\Entity\Idea;
 
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
-
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class MainController extends Controller
 {
     public function indexAction(Request $request)
     {
-    //     if (getenv('HTTP_CLIENT_IP'))
-    //     $ipaddress = getenv('HTTP_CLIENT_IP');
-    // else if(getenv('HTTP_X_FORWARDED_FOR'))
-    //     $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-    // else if(getenv('HTTP_X_FORWARDED'))
-    //     $ipaddress = getenv('HTTP_X_FORWARDED');
-    // else if(getenv('HTTP_FORWARDED_FOR'))
-    //     $ipaddress = getenv('HTTP_FORWARDED_FOR');
-    // else if(getenv('HTTP_FORWARDED'))
-    //     $ipaddress = getenv('HTTP_FORWARDED');
-    // else if(getenv('REMOTE_ADDR'))
-    //     $ipaddress = getenv('REMOTE_ADDR');
-    // else
-    //     $ipaddress = 'UNKNOWN';
-    //     var_dump($ipaddress);
-
+        $global_functions = $this->container->get('global_functions');
+              
         // Liste des idées
         $t_ideas = $this->getDoctrine()->getRepository('AppBundle:Idea')->findAll();
-        
+
+        $voted_ideas = [];
+        foreach($t_ideas as $idea) {
+            $id = $idea->getId();
+
+            foreach($idea->getVotes() as $vote) {
+                if($vote->getIpAdress() == $global_functions->getCurrentIp()) {
+                    $voted_ideas[$id] = true;
+                    break;
+                }
+            }
+        }
+
+        $vars['voted_ideas'] = json_encode($voted_ideas);
+
         //Serialization des objects pour les passer à mon component react
         $vars['ideas'] = $this->serializeData($t_ideas);
-        
 
         $idea = new Idea();
         $form = $this->get('form.factory')->create(IdeaType::class, $idea);
@@ -60,11 +58,15 @@ class MainController extends Controller
         return $this->render('AppBundle:App:index.html.twig', $vars);
     }
 
-    private function serializeData($data, $type = "json") {
-        $encoders = array(new JsonEncoder());
-        $normalizers = array(new GetSetMethodNormalizer());
-        $serializer = new Serializer($normalizers, $encoders);
+    private function serializeData($data) {
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
 
-        return $serializer->serialize($data, $type);
+        $normalizer->setCircularReferenceHandler(function ($object) {
+            return $object->getId();
+        });
+
+        $serializer = new Serializer(array($normalizer), array($encoder));
+        return $serializer->serialize($data, 'json');
     }
 }

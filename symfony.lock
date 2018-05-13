@@ -23,6 +23,15 @@
     "doctrine/lexer": {
         "version": "v1.0.1"
     },
+    "friendsofsymfony/jsrouting-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "370bcf99b04c0dfd0b545745aad622d757af5e1b"
+        }
+    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -128,6 +137,9 @@
             "ref": "a249484db698d1a847a30291c8f732414ac47e25"
         }
     },
+    "symfony/serializer": {
+        "version": "v3.4.9"
+    },
     "symfony/twig-bridge": {
         "version": "v3.4.9"
     },
@@ -163,5 +175,8 @@
     },
     "twig/twig": {
         "version": "v2.4.8"
+    },
+    "willdurand/jsonp-callback-validator": {
+        "version": "v1.1.0"
     }
 }

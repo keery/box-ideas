@@ -2,3 +2,10 @@ bi_main:
     path: /
     defaults:
         _controller: AppBundle:Main:index
+
+
+
+bi_ajax_upvote:
+    path: ajax/upvote
+    defaults:
+        _controller: AppBundle:Ajax:upvote
