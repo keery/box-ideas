@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use AppBundle\Entity\Vote;
+use AppBundle\Entity\Idea;
 
 class AjaxController extends Controller
 {
@@ -38,9 +39,27 @@ class AjaxController extends Controller
 
             $em->flush();
 
-            return new JsonResponse("Param idIdea required");            
+            return new JsonResponse(true);            
         }
         else return new JsonResponse("Param idIdea required");
+                
+    }
+
+    public function deleteAction(Idea $idea, Request $request)
+    {
+        if(isset($idea)) {
+            
+            $em = $this
+                ->getDoctrine()
+                ->getManager()
+            ;
+
+            $em->remove($idea);
+            // $em->flush();
+
+            return new JsonResponse("cool");            
+        }
+        else return new JsonResponse("Error idea not found");
                 
     }
 }

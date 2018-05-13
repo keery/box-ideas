@@ -6,7 +6,7 @@
 .container-fluid {
     max-width: 1160px; 
 }
-
+.spacing-v { margin: 15px 0; }
 .notif-titre
 {
 	margin: 0 0 5px;

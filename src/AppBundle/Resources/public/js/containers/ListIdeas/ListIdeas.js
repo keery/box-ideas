@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import './ListIdeas.css'
 import Idea from '../../components/Idea/Idea.js'
-import throttle from 'lodash.throttle'
+import remove from 'lodash.remove'
 
 
 class ListIdeas extends Component {
 
-    
     constructor(props) {
         super(props)
 
@@ -15,6 +14,24 @@ class ListIdeas extends Component {
             ideas: props.ideas,
             voted_ideas: props.voted_ideas
         }
+        this.deleteIdea = this.deleteIdea.bind(this)
+    }
+
+    //Supprime une idée
+    deleteIdea(id) {        
+        const { ideas } = this.state;
+        
+        const config = { 
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+        };
+
+        fetch('ajax/delete/idea/'+id, config)
+        .then((response) => {          
+            remove(ideas, (el) => el.id == id )
+            this.setState({ ideas: ideas });
+        })
+        .catch(error => console.warn(error));
     }
     
     render() {
@@ -34,6 +51,7 @@ class ListIdeas extends Component {
                                     description={description}  
                                     nbVote={votes.length}
                                     voted={ id in voted_ideas ? true : false }
+                                    deleteFunc={this.deleteIdea}
                                 />
                             </li>
                         ))
@@ -46,8 +64,7 @@ class ListIdeas extends Component {
 }
 
 ListIdeas.propTypes = {
-    ideas: PropTypes.array.isRequired,
-    voted_ideas: PropTypes.array.isRequired
+    ideas: PropTypes.array.isRequired
 }
 
 export default ListIdeas

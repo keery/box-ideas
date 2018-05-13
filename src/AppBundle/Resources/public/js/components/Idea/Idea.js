@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import './Idea.css'
-import throttle from 'lodash.throttle'
-
+import PropTypes from 'prop-types';
 
 class Idea extends Component {
 
@@ -20,6 +19,9 @@ class Idea extends Component {
             voted: props.voted,
             //nombre total de vote
             nbVote: props.nbVote,
+            isAdmin: props.isAdmin,
+            //Fonction du container List idea pour supprimer l'idée
+            deleteFunc: props.deleteFunc,
             value: (props.voted ? "Unvote" : "Upvote")
         }
     }
@@ -47,11 +49,14 @@ class Idea extends Component {
 
     render() {
 
-        const { id, title, author, description, votable, voted, nbVote, value } = this.state;
+        const { id, title, author, description, votable, voted, nbVote, value, deleteFunc, isAdmin } = this.state;
         return (
             <div className="Idea row">
                 <div className="col-sm-1 col-xs-2 text-center">
                     <button className={voted ? "btn btn-danger" : "btn btn-success"} disabled={!votable} type="button" title={value} onClick={votable ? () => this.handleVote(id) : () => {} }>{value}</button>
+                    {/* { isAdmin && */}
+                        <button className="btn btn-danger spacing-v" onClick={() => deleteFunc(id)} >Delete</button>
+                    {/* } */}
                 </div>
                 <div className="col-sm-11 col-xs-10">
                     <div className="title-idea">{ title }</div>
@@ -69,7 +74,8 @@ Idea.propTypes = {
     author: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     nbVote: PropTypes.number.isRequired,
-    voted : PropTypes.bool.isRequired
+    voted : PropTypes.bool.isRequired,
+    isAdmin : PropTypes.bool
 }
 
 export default Idea
