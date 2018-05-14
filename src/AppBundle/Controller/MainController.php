@@ -18,11 +18,16 @@ class MainController extends Controller
 {
     public function indexAction(Request $request)
     {
+
+        //Je vérifie si je possède le role admin
+        $vars['isAdmin'] = $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN');
+
         $global_functions = $this->container->get('global_functions');
-              
+
         // Liste des idées
         $t_ideas = $this->getDoctrine()->getRepository('AppBundle:Idea')->findAll();
 
+        //Liste des idées que pourq lesquelles j'ai déjà voté
         $voted_ideas = [];
         foreach($t_ideas as $idea) {
             $id = $idea->getId();
@@ -58,6 +63,7 @@ class MainController extends Controller
         return $this->render('AppBundle:App:index.html.twig', $vars);
     }
 
+    //Serialize mes entités
     private function serializeData($data) {
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();

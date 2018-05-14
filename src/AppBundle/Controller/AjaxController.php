@@ -15,7 +15,6 @@ class AjaxController extends Controller
 {
     public function upvoteAction(Idea $idea, Request $request)
     {
-        
         if(isset($idea)) {
             $em = $this
                 ->getDoctrine()
@@ -53,7 +52,7 @@ class AjaxController extends Controller
             $em->remove($idea);
             $em->flush();
 
-            return new JsonResponse("cool");            
+            return new JsonResponse(true);           
         }
         else return new JsonResponse("Error idea not found");
                 

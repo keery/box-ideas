@@ -3,7 +3,10 @@ bi_main:
     defaults:
         _controller: AppBundle:Main:index
 
-
+bi_main_admin:
+    path: /admin/
+    defaults:
+        _controller: AppBundle:Main:index        
 
 bi_ajax_upvote:
     path: ajax/upvote/{id}
@@ -17,4 +20,15 @@ bi_ajax_delete_idea:
     defaults:
         _controller: AppBundle:Ajax:delete  
     requirements:
-        id: .\d*              
+        id: .\d*    
+
+bi_login:
+    path: /login/
+    defaults:
+        _controller: AppBundle:User:connexion
+
+bi_login_check:
+    path: /admin/login_check/
+
+bi_logout:
+    path: /admin/logout/                  

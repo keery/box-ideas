@@ -36,15 +36,15 @@ class Idea extends Component {
         else this.setState( {voted : true, nbVote: this.state.nbVote+1, value: "Unvote", votable: false})
         
         const config = { 
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({idIdea: index})
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
         };
 
         fetch('ajax/upvote/'+index, config)
         .then((response) => {            
             this.setState( {votable: true })
-        });
+        })
+        .catch(error => console.warn(error));
     }
 
     render() {
@@ -54,9 +54,9 @@ class Idea extends Component {
             <div className="Idea row">
                 <div className="col-sm-1 col-xs-2 text-center">
                     <button className={voted ? "btn btn-danger" : "btn btn-success"} disabled={!votable} type="button" title={value} onClick={votable ? () => this.handleVote(id) : () => {} }>{value}</button>
-                    {/* { isAdmin && */}
+                    { isAdmin &&
                         <button className="btn btn-danger spacing-v" onClick={() => deleteFunc(id)} >Delete</button>
-                    {/* } */}
+                    }
                 </div>
                 <div className="col-sm-11 col-xs-10">
                     <div className="title-idea">{ title }</div>

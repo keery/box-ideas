@@ -11,7 +11,12 @@
     {# Liste des différentes idées #}
     <section>
         <h1>List ideas</h1>
-        <div id="listIdea" data-ideas="{{ ideas }}" data-voted-ideas="{{ voted_ideas }}"></div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="spacing-v text-right">
+                <a href="{{ path('bi_logout') }}" class="btn btn-danger" title="Sign out">Sign out</a>
+            </div>
+        {% endif %}
+        <div id="listIdea" data-ideas="{{ ideas }}" data-voted-ideas="{{ voted_ideas }}" {{ isAdmin ? "data-is-admin="~isAdmin : "" }}></div>
     </section>
     
     {# Formulaire de publication d'idée #}

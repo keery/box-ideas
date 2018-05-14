@@ -12,7 +12,8 @@ class ListIdeas extends Component {
 
         this.state = { 
             ideas: props.ideas,
-            voted_ideas: props.voted_ideas
+            voted_ideas: props.voted_ideas,
+            isAdmin: this.props.isAdmin === '1'
         }
         this.deleteIdea = this.deleteIdea.bind(this)
     }
@@ -35,7 +36,7 @@ class ListIdeas extends Component {
     }
     
     render() {
-        const { ideas, voted_ideas } = this.state;
+        const { ideas, voted_ideas, isAdmin } = this.state;
 
         return (
             <div>
@@ -49,6 +50,7 @@ class ListIdeas extends Component {
                                     author={author} 
                                     title={title} 
                                     description={description}  
+                                    isAdmin={isAdmin}
                                     nbVote={votes.length}
                                     voted={ id in voted_ideas ? true : false }
                                     deleteFunc={this.deleteIdea}

@@ -1,0 +1,41 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Connexion - Administration{% endblock %}
+
+{% block stylesheets %}
+    {% stylesheets '@AppBundle/Resources/public/css/style-security.css' %}
+      <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+
+<div id="login-page"> 
+  <form method="POST" action="{{ path('bi_login_check') }}" id="login-form">
+    <div>
+      <h1>Administration</h1>
+      {% if error %}
+        <div class="alert alert-danger">{{ error.message }}</div>
+      {% endif %}
+      
+      <div class="group">       
+        <div class="input">
+          <i class="fa fa-user"></i><input type="text" name="_username" placeholder="Identifiant">
+        </div>
+        <div class="input">
+          <i class="fa fa-lock"></i><input type="password" name="_password" placeholder="Mot de passe" />    
+        </div>
+        <div>       
+          <input type="checkbox" name="_remember_me" class="on-off" id="on-off">
+          <label for="on-off"></label>
+          <span>Se souvenir ?</span>
+        </div>
+      </div>
+
+      <div class="button input"><input type="submit" value="Connexion"></div>
+      <a href="{{path('bi_main')}}" class="button">Retour au site</a>
+    </div>    
+  </form>
+</div>
+
+{% endblock %}
