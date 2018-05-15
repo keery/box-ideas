@@ -1,10 +1,10 @@
-#Routes:
+# Routes:
   "/" : List of every ideas w/ form to post new
   "/admin" : Same as "/" w/ button to delete
 
-#User login:
+# User login:
   login: admin
   password: admin
 
-#Url access:
+# Url access:
 http://guillaumeesnault.fr/windoo/web/
